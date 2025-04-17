@@ -16,6 +16,7 @@ node_modules/
 
 # Project Output
 videos/
+mockup_data.json
 
 # IDE / Editor Files
 .vscode/
@@ -24,4 +25,3 @@ videos/
 # Sensitive Files (Example - if you use .env files)
 # .env 
 README.txt
-mockup_data.json
