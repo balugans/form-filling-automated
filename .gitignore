@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Playwright
+# Browser binaries are usually installed elsewhere via `playwright install`,
+# but node_modules might appear if mixing with Node.js workflows.
+node_modules/
+
+# Project Output
+videos/
+
+# IDE / Editor Files
+.vscode/
+.idea/
+
+# Sensitive Files (Example - if you use .env files)
+# .env 
+README.txt
