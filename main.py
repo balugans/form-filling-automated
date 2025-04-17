@@ -1,11 +1,9 @@
 import asyncio
 import json
 import os
+import argparse
 from playwright.async_api import async_playwright
 from openai import OpenAI, APIError
-
-# Load mock data
-from mockup_data import mock_data
 
 # LLM Configuration
 # Read API key from environment variable
@@ -113,26 +111,54 @@ async def fill_fields(fields, page, mock_data):
 
 async def main():
     """Main function to run the playwright automation."""
+
+    # --- Argument Parsing ---
+    parser = argparse.ArgumentParser(description="Automated form filler using Playwright and OpenAI.")
+    parser.add_argument("--url", required=True, help="The URL of the web form to fill.")
+    parser.add_argument("--data-file", required=True, help="Path to the JSON file containing mock data.")
+    args = parser.parse_args()
+
+    # --- Load Mock Data ---   
+    try:
+        with open(args.data_file, 'r') as f:
+            mock_data = json.load(f)
+    except FileNotFoundError:
+        print(f"❌ Error: Mock data file not found at '{args.data_file}'")
+        return
+    except json.JSONDecodeError:
+        print(f"❌ Error: Could not decode JSON from '{args.data_file}'. Please ensure it's valid JSON.")
+        return
+    except Exception as e:
+        print(f"❌ An unexpected error occurred while loading mock data: {e}")
+        return
+
+    # --- Playwright Automation ---
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=False)
-        # Create a context with video recording enabled
         context = await browser.new_context(
             record_video_dir="videos/",
-            # Optional: set viewport size for consistent recording dimensions
             # viewport={ 'width': 1280, 'height': 720 }
         )
         page = await context.new_page()
         try:
-            await page.goto("https://mendrika-alma.github.io/form-submission/")
+            print(f"Navigating to {args.url}...")
+            await page.goto(args.url) # Use URL from argument
 
+            print("Extracting form fields...")
             fields = await extract_fields(page)
-            await fill_fields(fields, page, mock_data)
+            print(f"Found {len(fields)} fields. Attempting to fill...")
+
+            # Pass loaded mock_data to fill_fields
+            await fill_fields(fields, page, mock_data) 
 
             print("✅ Form filling complete (excluding signature and submission).")
 
+        except Exception as e:
+            print(f"❌ An error occurred during Playwright operations: {e}")
         finally:
-            # Ensure context is closed to save the video
+            print("Closing browser and saving video...")
             await context.close()
             await browser.close()
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())

@@ -24,3 +24,4 @@ videos/
 # Sensitive Files (Example - if you use .env files)
 # .env 
 README.txt
+mockup_data.py

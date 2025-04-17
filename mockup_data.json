@@ -1,4 +1,4 @@
-mock_data = {
+{
     "attorney": {
         "online_account_number": "A123456789",
         "family_name": "Doe",
@@ -20,19 +20,19 @@ mock_data = {
         "bar_number": "BBO#654321",
         "subject_to_restrictions": "no",
         "law_firm": "Doe & Associates Legal Group",
-        "is_nonprofit_rep": False,
+        "is_nonprofit_rep": false,
         "org_name": "",
         "accreditation_date": "",
         "associated_with_student": "no",
         "law_student": "",
-        "administrative_case": True,
+        "administrative_case": true,
         "administrative_matter": "I-485 Application to Register Permanent Residence",
-        "civil_case": False,
+        "civil_case": false,
         "civil_matter": "",
-        "other_legal": False,
+        "other_legal": false,
         "other_legal_matter": "",
         "receipt_number": "MSC2190123456",
-        "client_type": "Beneficiary",
+        "client_type": "Beneficiary"
     },
     "client": {
         "family_name": "Jones",
@@ -55,7 +55,7 @@ mock_data = {
         "send_notices_to_attorney": "Y",
         "send_documents_to_attorney": "Y",
         "send_documents_to_client": "N",
-        "signature_date": "",
+        "signature_date": ""
     },
     "attorney_signature_date": "",
     "additional_signature_date": "",
@@ -69,9 +69,9 @@ mock_data = {
                     "page_number": "1",
                     "part_number": "2",
                     "item_number": "1.a",
-                    "additional_info": "Also licensed in New York State Bar, Bar #NY7654321",
+                    "additional_info": "Also licensed in New York State Bar, Bar #NY7654321"
                 }
-            ],
+            ]
         }
-    },
-}
+    }
+} 

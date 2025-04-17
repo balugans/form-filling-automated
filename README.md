@@ -58,21 +58,28 @@ There was use of coding agents including Cursor to finish the project on time an
 
 ## Running the Script
 
-Execute the main script from your terminal:
+Execute the main script from your terminal, providing the target URL and the path to your mock data JSON file:
 
 ```bash
-python main.py
+python main.py --url <target-form-url> --data-file <path-to-your-data.json>
+```
+
+**Example:**
+```bash
+python main.py --url https://mendrika-alma.github.io/form-submission/ --data-file mockup_data.json
 ```
 
 The script will:
+*   Parse the command-line arguments.
+*   Load the mock data from the specified JSON file.
 *   Launch a Chromium browser window.
-*   Navigate to the hardcoded URL (`https://mendrika-alma.github.io/form-submission/`).
-*   Attempt to fill the form fields.
+*   Navigate to the specified URL.
+*   Attempt to fill the form fields using the loaded data and the LLM.
 *   Print status messages to the console.
 *   Save a `.webm` video recording of the session in the `videos/` directory upon completion.
 
 ## Configuration
 
-*   **Target URL:** Currently hardcoded in `main.py`. Modify the `page.goto(...)` line to target a different form.
-*   **Mock Data:** The data used for filling the form is located in `mockup_data.py`. Update this file according to the form you are targeting.
+*   **Target URL:** Provided via the `--url` command-line argument (required).
+*   **Mock Data:** The path to the JSON file containing data for filling the form is provided via the `--data-file` command-line argument (required). See `mockup_data.json` for an example structure.
 *   **LLM Model:** The OpenAI model used can be changed by modifying the `model` variable in `main.py`. 
