@@ -64,11 +64,6 @@ Execute the main script from your terminal, providing the target URL and the pat
 python main.py --url <target-form-url> --data-file <path-to-your-data.json>
 ```
 
-**Example:**
-```bash
-python main.py --url https://mendrika-alma.github.io/form-submission/ --data-file mockup_data.json
-```
-
 The script will:
 *   Parse the command-line arguments.
 *   Load the mock data from the specified JSON file.
